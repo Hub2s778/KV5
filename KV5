@@ -1,0 +1,169 @@
+    -- Load Orion Library
+    local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+
+    -- Configuração da janela principal usando OrionLib
+    local Window = OrionLib:MakeWindow({
+        Name = "Vision Hub |System Key|",           -- Nome exibido na janela e introdução
+        HidePremium = false,                    -- Esconder funções premium (false para exibi-las)
+        SaveConfig = true,                      -- Salvar as configurações automaticamente
+        ConfigFolder = "VisionHubSystemKey",    -- Pasta onde as configurações serão salvas
+        IntroEnabled = true,                    -- Ativar introdução ao abrir
+        IntroText = "Vision Hub |System Key|",     -- Texto exibido na introdução
+        IntroIcon = "rbxassetid://71065081734857"  -- ID do ícone mostrado na introdução
+    })
+    
+        -- Função para salvar a Key localmente
+        local function saveKey(key)
+            writefile("Key_Saved1.txt", key)
+        end
+    
+        -- Função para carregar a Key salva
+        local function loadKey()
+            if isfile("Key_Saved1.txt") then
+                return readfile("Key_Saved1.txt")
+            end
+            return nil
+        end
+    
+        -- Notificação inicial
+        OrionLib:MakeNotification({
+            Name = "Logged In!",
+            Content = "You are logged in as a player",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+    
+        -- Variáveis globais para a Key
+        _G.Key = "KeyUniversal"
+        _G.KeyInput = loadKey() or ""
+    
+        -- Função para iniciar o script principal
+        local function MakeScriptHub()
+            local CentralHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hub2s778/KV4/refs/heads/main/KV4"))()
+        end
+    
+        -- Funções de notificação
+        local function CorrectKeyNotification()
+            OrionLib:MakeNotification({
+                Name = "Correct Key",
+                Content = "You have entered the correct Key!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    
+        local function IncorrectKeyNotification()
+            OrionLib:MakeNotification({
+                Name = "Incorrect Key",
+                Content = "You have entered an incorrect Key!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    
+        -- Verificar se a Key já está salva e correta
+        if _G.KeyInput == _G.Key then
+            MakeScriptHub()
+            CorrectKeyNotification()
+        else
+            -- Criar a aba de Key
+            local Tab = Window:MakeTab({
+                Name = "Key",
+                Icon = "rbxassetid://71897903163299",
+                PremiumOnly = false
+            })
+    
+            Tab:AddTextbox({
+                Name = "Enter Key",
+                Default = "",
+                TextDisappear = true,
+                Callback = function(Value)
+                    _G.KeyInput = Value
+                end
+            })
+    
+            Tab:AddButton({
+                Name = "Verify Key",
+                Callback = function()
+                    if _G.KeyInput == _G.Key then
+                        saveKey(_G.KeyInput)
+                        MakeScriptHub()
+                        CorrectKeyNotification()
+                    else
+                        IncorrectKeyNotification()
+                    end
+                end
+            })
+    
+            -- Criar a aba de obtenção da Key
+            local GetKeyTab = Window:MakeTab({
+                Name = "Get Key!",
+                Icon = "rbxassetid://71897903163299",
+                PremiumOnly = false
+            })
+    
+            local encutadorlink = "https://link-center.net/1275196/system-key-1"
+            local discordLink = "" -- Aqui tu bota o convite do server
+            local youtubeLink = "https://youtu.be/7XHT3mZGY8k"
+    
+            GetKeyTab:AddButton({
+                Name = "Key (Link Copied Automatically)",
+                Callback = function()
+                    setclipboard(encutadorlink)
+                    OrionLib:MakeNotification({
+                        Name = "Discord Link Copied",
+                        Content = "The link to join our Discord has been copied to your clipboard!",
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
+                end
+            })
+    
+                GetKeyTab:AddButton({
+                Name = "Get key",
+                Callback = function()
+                    setclipboard(encutadorlink)
+                    OrionLib:MakeNotification({
+                        Name = "Discord Link Copied",
+                        Content = "The link to join our Discord has been copied to your clipboard!",
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
+                end
+            })
+    
+            GetKeyTab:AddLabel("Tutorial on how to get the Key below!")
+    
+            GetKeyTab:AddButton({
+                Name = "Tutorial on how to get the Key",
+                Callback = function()
+                    setclipboard(youtubeLink)
+                    OrionLib:MakeNotification({
+                        Name = "Tutorial Link Copied",
+                        Content = "The tutorial link has been copied to your clipboard!",
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
+                end
+            })
+        end
+    
+        -- Creating the Discord tab
+        local DiscordTab = Window:MakeTab({
+        Name = "Discord",
+        Icon = "rbxassetid://90685941326593", -- Icon for the Discord tab
+        PremiumOnly = false
+    })
+    
+        DiscordTab:AddLabel("Join our discord")
+    
+    
+        DiscordTab:AddButton({
+        Name = "Link Discord",
+        Callback = function()
+            setclipboard(youtubeLink)
+          end    
+    })
+        
+        OrionLib:Init()
+    
