@@ -1,6 +1,4 @@
-    -- Load Orion Library
-    local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
-
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/ScriptBrv/LibraryOrion/refs/heads/main/LibraryOrion"))()
     -- Configuração da janela principal usando OrionLib
     local Window = OrionLib:MakeWindow({
         Name = "Vision Hub |System Key|",           -- Nome exibido na janela e introdução
